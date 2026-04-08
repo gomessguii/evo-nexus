@@ -74,8 +74,8 @@ def get_schedule():
         if not task_name and script:
             task_name = script.replace(".py", "").replace("_", " ").title()
 
-        # Get agent from script name
-        script_key = script.replace(".py", "") if script else ""
+        # Get agent from script name (strip custom/ prefix and .py)
+        script_key = script.replace("custom/", "").replace(".py", "") if script else ""
         agent = SCRIPT_AGENTS.get(script_key, "")
 
         entries.append({
