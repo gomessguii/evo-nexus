@@ -37,7 +37,6 @@ OpenClaude is a multi-agent workspace built on top of Claude Code. It turns a si
 - **17 HTML Report Templates** — dark-themed dashboards for every domain
 - **Persistent Memory** — two-tier system (CLAUDE.md + memory/) across sessions
 - **Full Observability** — JSONL logs, execution metrics, cost tracking per routine
-- **Evo Method** — Complete dev framework (analysis → planning → architecture → implementation → QA)
 
 ---
 
@@ -220,7 +219,7 @@ open-claude/
 │   └── frontend/        — React + TypeScript + Tailwind
 ├── social-auth/         — OAuth multi-account app
 ├── config/              — workspace.yaml, routines.yaml
-├── _evo/                — Evo Method (dev framework)
+├── workspace/           — user data folders (gitignored content)
 ├── setup.py             — CLI setup wizard
 ├── scheduler.py         — automated routine scheduler
 ├── Makefile             — 44+ make targets
@@ -228,7 +227,7 @@ open-claude/
 └── docker-compose.yml   — containerized deployment
 ```
 
-Workspace folders (`01 Daily Logs/`, `02 Projects/`, etc.) are created by setup and gitignored — they hold your personal data.
+Workspace folders (`workspace/daily-logs/`, `workspace/projects/`, etc.) are created by setup — content is gitignored, only structure is tracked.
 
 ---
 
@@ -268,7 +267,7 @@ make docker-down     # Stop containers
 |-----|-------------|
 | [Getting Started](docs/getting-started.md) | Full setup guide |
 | [Architecture](docs/architecture.md) | How agents, skills, and routines work |
-| [ROTINAS.md](ROTINAS.md) | Complete routine documentation |
+| [ROUTINES.md](ROUTINES.md) | Complete routine documentation |
 | [ROADMAP.md](ROADMAP.md) | Improvement plan and backlog |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute |
 | [CHANGELOG.md](CHANGELOG.md) | Release history |

@@ -10,26 +10,37 @@
 
 # ── Personal workspace data ───────────────
 # Track folder structure (.gitkeep) but ignore all content inside.
-01 Daily Logs/*
-!01 Daily Logs/.gitkeep
-02 Projects/*
-!02 Projects/.gitkeep
-03 Comunidade/*
-!03 Comunidade/.gitkeep
-04 Redes Sociais/*
-!04 Redes Sociais/.gitkeep
-05 Financeiro/*
-!05 Financeiro/.gitkeep
-06 Pessoal/*
-!06 Pessoal/.gitkeep
-07 Reuniões/*
-!07 Reuniões/.gitkeep
-08 Cursos/*
-!08 Cursos/.gitkeep
-09 Estrategia/*
-!09 Estrategia/.gitkeep
-09 Reuniões/*
-!09 Reuniões/.gitkeep
+# Old PT folder names (keep ignoring for existing installs)
+01 Daily Logs/
+02 Projects/
+03 Comunidade/
+04 Redes Sociais/
+05 Financeiro/
+06 Pessoal/
+07 Reuniões/
+08 Cursos/
+09 Estrategia/
+09 Reuniões/
+
+# EN folder names (new standard)
+workspace/daily-logs/*
+!workspace/daily-logs/.gitkeep
+workspace/projects/*
+!workspace/projects/.gitkeep
+workspace/community/*
+!workspace/community/.gitkeep
+workspace/social/*
+!workspace/social/.gitkeep
+workspace/finance/*
+!workspace/finance/.gitkeep
+workspace/personal/*
+!workspace/personal/.gitkeep
+workspace/meetings/*
+!workspace/meetings/.gitkeep
+workspace/courses/*
+!workspace/courses/.gitkeep
+workspace/strategy/*
+!workspace/strategy/.gitkeep
 
 # ── Agent memory (runtime, personal) ──────
 .claude/agent-memory/
@@ -55,7 +66,8 @@ dashboard/data/.secret_key
 dashboard/frontend/node_modules/
 dashboard/frontend/dist/
 
-# ── Evo Method output ────────────────────
+# ── Evo Method (separate project) ────────
+_evo/
 _evo-output/
 
 # ── Python ────────────────────────────────
