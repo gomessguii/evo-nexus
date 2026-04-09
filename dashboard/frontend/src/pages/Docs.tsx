@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { ChevronDown, ChevronRight, Search, Menu, X, BookOpen } from 'lucide-react'
+import { ChevronDown, ChevronRight, Search, Menu, X, BookOpen, Rocket, LayoutDashboard, Bot, Zap, Clock, Plug, Globe, FileText } from 'lucide-react'
 
 const API = import.meta.env.DEV ? 'http://localhost:8080' : ''
 
@@ -149,13 +149,27 @@ export default function Docs() {
 
       {/* Nav */}
       <nav className="flex-1 overflow-y-auto px-3 pb-4">
-        {filtered.map((sec) => (
-          <div key={sec.slug} className="mb-1">
+        {filtered.map((sec) => {
+          const sectionIcons: Record<string, typeof Rocket> = {
+            'getting-started': Rocket,
+            'guides': BookOpen,
+            'dashboard': LayoutDashboard,
+            'agents': Bot,
+            'skills': Zap,
+            'routines': Clock,
+            'integrations': Plug,
+            'real-world': Globe,
+            'reference': FileText,
+          }
+          const Icon = sectionIcons[sec.slug] || FileText
+          return (
+          <div key={sec.slug} className="mb-2">
             <button
               onClick={() => toggleSection(sec.slug)}
-              className="w-full flex items-center gap-2 px-2 py-2 text-xs uppercase tracking-wider text-[#667085] font-semibold hover:text-[#D0D5DD] transition-colors"
+              className="w-full flex items-center gap-2 px-2 py-1.5 text-[11px] uppercase tracking-widest text-[#667085] font-semibold hover:text-[#D0D5DD] transition-colors"
             >
-              {collapsed[sec.slug] ? <ChevronRight size={14} /> : <ChevronDown size={14} />}
+              {collapsed[sec.slug] ? <ChevronRight size={12} /> : <ChevronDown size={12} />}
+              <Icon size={13} className="text-[#00FFA7]/60" />
               {sec.title}
             </button>
             {!collapsed[sec.slug] && (
@@ -193,7 +207,8 @@ export default function Docs() {
               </div>
             )}
           </div>
-        ))}
+          )
+        })}
       </nav>
 
       {/* Back to dashboard */}

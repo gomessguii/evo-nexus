@@ -82,11 +82,11 @@ def _build_tree() -> list[dict]:
             "children": children,
         })
 
-    # 2) Subdirectories → one section each
-    subdirs = sorted(
-        [d for d in DOCS_DIR.iterdir() if d.is_dir() and d.name != "imgs"],
-        key=lambda d: d.name,
-    )
+    # 2) Subdirectories → one section each, in logical order
+    _SECTION_ORDER = ["guides", "dashboard", "agents", "skills", "routines", "integrations", "real-world", "reference"]
+    subdirs = [d for d in DOCS_DIR.iterdir() if d.is_dir() and d.name != "imgs"]
+    order_map_dirs = {name: i for i, name in enumerate(_SECTION_ORDER)}
+    subdirs.sort(key=lambda d: (order_map_dirs.get(d.name, 999), d.name))
     for subdir in subdirs:
         md_files = sorted(subdir.rglob("*.md"), key=lambda f: f.name)
         if not md_files:
@@ -101,8 +101,18 @@ def _build_tree() -> list[dict]:
                 "path": str(rel),
                 "content_preview": _content_preview(f),
             })
+        _SECTION_TITLES = {
+            "guides": "Guides",
+            "dashboard": "Dashboard",
+            "agents": "Agents",
+            "skills": "Skills",
+            "routines": "Routines",
+            "integrations": "Integrations",
+            "real-world": "Real World",
+            "reference": "Reference",
+        }
         sections.append({
-            "title": subdir.name.replace("-", " ").replace("_", " ").title(),
+            "title": _SECTION_TITLES.get(subdir.name, subdir.name.replace("-", " ").title()),
             "slug": subdir.name,
             "children": children,
         })
