@@ -62,16 +62,25 @@ renderer.image = ({ href, text }: { href: string; text: string }) => {
 renderer.blockquote = ({ text }: { text: string }) =>
   `<blockquote class="border-l-4 border-[#00FFA7] pl-4 py-2 my-4 text-[#8b949e] bg-[#161b22] rounded-r">${text}</blockquote>`;
 
-renderer.table = ({ header, body }: { header: string; body: string }) =>
-  `<div class="overflow-x-auto my-4"><table class="w-full border-collapse">${header}${body}</table></div>`;
-
-renderer.tablerow = ({ text }: { text: string }) =>
-  `<tr class="hover:bg-[#161b22]">${text}</tr>`;
-
-renderer.tablecell = ({ text, header }: { text: string; header: boolean }) =>
-  header
-    ? `<th class="px-4 py-2 text-left text-sm font-semibold text-[#e6edf3] border-b border-[#30363d]">${text}</th>`
-    : `<td class="px-4 py-2 text-sm text-[#8b949e] border-b border-[#21262d]">${text}</td>`;
+renderer.table = ({ header, rows }: { header: { text: string; tokens: any[]; header: boolean; align: string | null }[]; rows: { text: string; tokens: any[]; header: boolean; align: string | null }[][] }) => {
+  const parser = marked.parse;
+  const renderCell = (cell: { text: string; tokens: any[]; header: boolean; align: string | null }, isHeader: boolean) => {
+    const content = cell.tokens.map((t: any) => {
+      if (t.type === 'text') return t.text;
+      if (t.type === 'codespan') return `<code class="bg-[#161b22] text-[#00FFA7] px-1.5 py-0.5 rounded text-sm font-mono">${t.text}</code>`;
+      if (t.type === 'strong') return `<strong class="text-[#e6edf3] font-semibold">${t.text}</strong>`;
+      if (t.type === 'em') return `<em>${t.text}</em>`;
+      if (t.type === 'link') return `<a href="${t.href}" class="text-[#00FFA7] hover:underline">${t.text}</a>`;
+      return t.raw || t.text || '';
+    }).join('');
+    return isHeader
+      ? `<th class="px-4 py-2 text-left text-sm font-semibold text-[#e6edf3] border-b border-[#30363d]">${content}</th>`
+      : `<td class="px-4 py-2 text-sm text-[#8b949e] border-b border-[#21262d]">${content}</td>`;
+  };
+  const headerRow = `<tr>${header.map(c => renderCell(c, true)).join('')}</tr>`;
+  const bodyRows = rows.map(row => `<tr class="hover:bg-[#161b22]">${row.map(c => renderCell(c, false)).join('')}</tr>`).join('');
+  return `<div class="overflow-x-auto my-4"><table class="w-full border-collapse"><thead>${headerRow}</thead><tbody>${bodyRows}</tbody></table></div>`;
+};
 
 renderer.list = ({ body, ordered }: { body: string; ordered: boolean }) =>
   ordered
