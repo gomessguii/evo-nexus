@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2026-04-09
+
+### Added
+- **Evolution API skill** (`int-evolution-api`) — 33 commands: instances, messages (text, media, location, contact, buttons, lists, polls), chats, groups, webhooks
+- **Evolution Go skill** (`int-evolution-go`) — 24 commands: instances, messages, reactions, presence
+- **Evo CRM skill** (`int-evo-crm`) — 48 commands: contacts, conversations, messages, inboxes, pipelines, labels
+- **Integration docs** — 3 new guides: `docs/integrations/evolution-api.md`, `evolution-go.md`, `evo-crm.md`
+- **Dashboard integrations** — Evolution API, Evolution Go, and Evo CRM cards on Integrations page
+- **`.env.example`** — added `EVOLUTION_API_URL/KEY`, `EVOLUTION_GO_URL/KEY`, `EVO_CRM_URL/TOKEN`
+
+### Changed
+- **Integration count** — 16 → 19 across README, site, and docs
+- **Community members** — 7,000+ → 17,000+ on site
+- **v0.4 roadmap complete** — all 13 items done, Evolution product skills was the last one
+
 ## [0.5.1] - 2026-04-09
 
 ### Changed
