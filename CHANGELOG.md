@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.1] - 2026-04-09
+
+### Changed
+- **Docs markdown rendering** — replaced regex parser with `marked` library. Code blocks, ASCII art, and nested formatting now render correctly on the site.
+- **README and site** — `npx @evoapi/open-claude` is now the primary install method. Git clone shown as alternative.
+- **Release skill** — `make docs-build` and frontend rebuild are now mandatory on every release (not conditional).
+
+### Fixed
+- **Site /docs navigation** — nested doc pages (e.g., `/docs/guides/creating-routines`) no longer 404. Switched from `useRoute` wildcard to direct URL parsing.
+- **Site route matching** — changed from `/docs/:slug+` to `/docs/*` for reliable wouter matching.
+- **CLI default directory** — `npx @evoapi/open-claude` without args now clones into current directory (`.`), not a subfolder.
+- **Site CI build** — added missing `print-agents.png` to site assets.
+- **Docs sync** — site now serves updated docs matching the repo (was stale).
+
 ## [0.5.0] - 2026-04-09
 
 ### Added
